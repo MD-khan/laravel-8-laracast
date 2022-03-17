@@ -17,20 +17,33 @@ use Illuminate\Support\Facades\File;
 */
 
 Route::get('/', function () {
+
+    # Approach 1
+    // $files = File::files(resource_path("posts/"));
+    // $posts = [];
+    // foreach ($files as $file) {
+    //     $document = YamlFrontMatter::parseFile($file); # ignore the red line, its working
+    //     $posts[] = new Post(
+    //         $document->title,
+    //         $document->excerpt,
+    //         $document->date,
+    //         $document->body,
+    //         $document->slug
+    //     );
+    // }
+
+    # Approach 2
     $files = File::files(resource_path("posts/"));
-
-    $posts = [];
-
-    foreach ($files as $file) {
-        $document = YamlFrontMatter::parseFile($file);
-        $posts[] = new Post(
+    $posts = array_map(function ($files) {
+        $document = YamlFrontMatter::parseFile($files); # ignore the red line, its working
+        return new Post(
             $document->title,
             $document->excerpt,
             $document->date,
             $document->body,
             $document->slug
         );
-    }
+    }, $files);
 
     return view('posts', [
         'posts' => $posts
