@@ -32,18 +32,32 @@ Route::get('/', function () {
     //     );
     // }
 
-    # Approach 2
-    $files = File::files(resource_path("posts/"));
-    $posts = array_map(function ($files) {
-        $document = YamlFrontMatter::parseFile($files); # ignore the red line, its working
-        return new Post(
-            $document->title,
-            $document->excerpt,
-            $document->date,
-            $document->body,
-            $document->slug
-        );
-    }, $files);
+    # Approach 2 : array_map
+    // $files = File::files(resource_path("posts/"));
+    // $posts = array_map(function ($files) {
+    //     $document = YamlFrontMatter::parseFile($files); # ignore the red line, its working
+    //     return new Post(
+    //         $document->title,
+    //         $document->excerpt,
+    //         $document->date,
+    //         $document->body,
+    //         $document->slug
+    //     );
+    // }, $files);
+
+    # Approach 3 : Collection
+    #$files = File::files(resource_path("posts/"));
+    $posts = collect(File::files(resource_path("posts/")))
+        ->map(function ($file) {
+            $document = YamlFrontMatter::parseFile($file); # ignore the red line, its working
+            return new Post(
+                $document->title,
+                $document->excerpt,
+                $document->date,
+                $document->body,
+                $document->slug
+            );
+        });
 
     return view('posts', [
         'posts' => $posts
