@@ -27,9 +27,13 @@ Route::get('/posts/{post}', function ($slug) {
         #abort(404);
         return redirect('/');
     }
-    $post = file_get_contents($path);
-        return view('post', [
-         'post' => $post
-         ]);
+
+    # Using cache for expensive operation
+    // $post = cache()->remember("post.{$slug}", now()->addMinutes(2), function() use ($path) {
+    //     #var_dump('file_get_contents($path)');
+    //     return file_get_contents($path);
+    // });
+    $post = cache()->remember("post.{$slug}", 5, fn() => file_get_contents($path));
+    return view('post', ['post' => $post]);
     #return view('post', $post);
 });
