@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,26 +9,15 @@
     <script src="/app.js"></script>
     <title>Document</title>
 </head>
+
 <body>
-    <article>
-        <h1> <a href="/posts/post-1"> My first post </a></h1>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore fuga maiores perspiciatis beatae quibusdam assumenda, ea dolorem, asperiores tenetur aut fugit veniam. Accusamus veniam quia quam reprehenderit nesciunt. Consectetur, vero!
-        </p>
-    </article>
+    <?php foreach ($posts as $post) : ?>
+        <article>
+            <?= $post ?>
+        </article>
+    <?php endforeach; ?>
 
-    <article>
-        <h1> <a href="/posts/post-2"> My first post </a></h1>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore fuga maiores perspiciatis beatae quibusdam assumenda, ea dolorem, asperiores tenetur aut fugit veniam. Accusamus veniam quia quam reprehenderit nesciunt. Consectetur, vero!
-        </p>
-    </article>
 
-    <article>
-    <h1> <a href="/posts/post-3"> My first post </a></h1>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore fuga maiores perspiciatis beatae quibusdam assumenda, ea dolorem, asperiores tenetur aut fugit veniam. Accusamus veniam quia quam reprehenderit nesciunt. Consectetur, vero!
-        </p>
-    </article>
 </body>
+
 </html>
