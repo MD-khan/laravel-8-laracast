@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,13 +9,19 @@
     <script src="/app.js"></script>
     <title>Document</title>
 </head>
+
 <body>
     <article>
-        <?=$post?>
+        <h1> <?= $post->title ?> </h1>
+
+        <div>
+            <?= $post->body ?>
+        </div>
     </article>
     <a href="/">Go Back</a>
- 
 
- 
+
+
 </body>
+
 </html>
