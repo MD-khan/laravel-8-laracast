@@ -32,7 +32,7 @@ class Post
                     $document->body(), # we need to call the body method
                     $document->slug
                 );
-            });
+            })->sortByDesc('date'); # last post first
     }
 
     public static function find($slug)
