@@ -63,10 +63,17 @@ Route::get('/', function () {
     ]);
 });
 
+# post by id
+// Route::get('/posts/{post}', function (Post $post) {
+//     # find a post by its slug and pass it to a view called "post"
+//     return view('post', [
+//         'post' => $post
+//     ]);
 
-Route::get('/posts/{post}', function ($id) {
+# Post by post slug
+Route::get('/posts/{post:slug}', function (Post $post) {
     # find a post by its slug and pass it to a view called "post"
     return view('post', [
-        'post' => Post::findOrFail($id)
+        'post' => $post
     ]);
 });
