@@ -59,8 +59,16 @@ Route::get('/', function () {
     //         );
     //     });
 
+
+    // \Illuminate\Support\Facades\DB::listen(function ($query) {
+    //     logger($query->sql);
+    // });
+
+
     return view('posts', [
-        'posts' => Post::all()
+        #'posts' => Post::all() # this will cause the n+1 issue
+        'posts' => Post::with('category')->get() # this is the solution
+        
     ]);
 });
 
