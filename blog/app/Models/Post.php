@@ -17,4 +17,11 @@ class Post extends Model
         # assuming post has only one category
         return $this->belongsTo(Category::class);
     }
+
+
+    public function user()
+    {
+        # a post has only one user
+        return $this->belongsTo(User::class);
+    }
 }

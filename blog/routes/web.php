@@ -68,7 +68,6 @@ Route::get('/', function () {
     return view('posts', [
         #'posts' => Post::all() # this will cause the n+1 issue
         'posts' => Post::with('category')->get() # this is the solution
-        
     ]);
 });
 
