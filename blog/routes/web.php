@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\User;
 
 
 /*
@@ -67,7 +68,7 @@ Route::get('/', function () {
 
     return view('posts', [
         #'posts' => Post::all() # this will cause the n+1 issue
-        'posts' => Post::latest()->with('category')->get() # this is the solution
+        'posts' => Post::latest()->with(['category', 'author'])->get() # this is the solution
     ]);
 });
 
@@ -89,5 +90,13 @@ Route::get('/posts/{post:slug}', function (Post $post) {
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('posts', [
         'posts' => $category->posts
+    ]);
+});
+
+# author
+Route::get('/authors/{author}', function (User $author) {
+    
+    return view('posts', [
+        'posts' => $author->posts
     ]);
 });

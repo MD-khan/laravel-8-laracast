@@ -19,9 +19,9 @@ class Post extends Model
     }
 
 
-    public function user()
+    public function author()
     {
         # a post has only one user
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id'); #over writing the id
     }
 }
