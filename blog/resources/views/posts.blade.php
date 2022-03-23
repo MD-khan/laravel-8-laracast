@@ -1,7 +1,32 @@
 <x-layout>
+    <!-- Header -->
+    @include('_posts-header')
+    <!-- End Header -->
+
+
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+        <!-- feature article -->
+        <x-post-feature-card />
+        <!--./End feature article-->
+
+        <div class="lg:grid lg:grid-cols-2">
+            <x-post-card />
+            <x-post-card />
+        </div> <!-- ./lg:grid-cols-2 -->
+
+        <div class="lg:grid lg:grid-cols-3">
+            <x-post-card />
+            <x-post-card />
+            <x-post-card />
+        </div>
+        <!--./ lg:grid-cols-3 -->
+
+
+    </main>
+
+
 
     @foreach ($posts as $post)
-
     <!-- dynamicly adding class to the even-->
     <article class="{{ $loop->even ? 'article': ''}}">
 

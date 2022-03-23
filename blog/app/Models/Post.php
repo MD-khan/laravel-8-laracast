@@ -16,7 +16,12 @@ class Post extends Model
     #This is the same as in 
     # 'posts' => $author->posts->load(['category', 'author'])
     # 'posts' => Post::latest()->get() 
+    # --> if dont want to fetch category or author
+    # use witout method
+    # App\Models\Post::without('author')->first()
     protected $with = ['category', 'author'];
+
+
 
     public function category()
     {
