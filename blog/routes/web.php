@@ -68,7 +68,7 @@ Route::get('/', function () {
 
     return view('posts', [
         #'posts' => Post::all() # this will cause the n+1 issue
-        'posts' => Post::latest()->with(['category', 'author'])->get() # this is the solution
+        'posts' => Post::latest()->get() # this is the solution
     ]);
 });
 
@@ -90,7 +90,7 @@ Route::get('/posts/{post:slug}', function (Post $post) {
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('posts', [
         // 'posts' => $category->posts # This line cases the n+1 problem
-        'posts' => $category->posts->load(['category', 'author'])  # this is the solutuon
+        'posts' => $category->posts  # this is the solutuon
     ]);
 });
 

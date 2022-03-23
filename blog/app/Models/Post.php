@@ -11,6 +11,12 @@ class Post extends Model
 
     protected $fillable = ['category_id', 'title', 'excerpt', 'body'];
 
+    # Post will be fetch wiht author and category
+    # This also solve the n+1 problem
+    #This is the same as in 
+    # 'posts' => $author->posts->load(['category', 'author'])
+    # 'posts' => Post::latest()->get() 
+    protected $with = ['category', 'author'];
 
     public function category()
     {
