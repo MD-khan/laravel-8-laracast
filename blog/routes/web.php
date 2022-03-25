@@ -68,7 +68,8 @@ Route::get('/', function () {
 
     return view('posts', [
         #'posts' => Post::all() # this will cause the n+1 issue
-        'posts' => Post::latest()->get() # this is the solution
+        'posts' => Post::latest()->get(), # this is the solution
+        'categories' => Category::all()
     ]);
 });
 
@@ -83,14 +84,17 @@ Route::get('/', function () {
 Route::get('/posts/{post:slug}', function (Post $post) {
     # find a post by its slug and pass it to a view called "post"
     return view('post', [
-        'post' => $post
+        'post' => $post,
+        'categories' => Category::all()
     ]);
 });
 
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('posts', [
         // 'posts' => $category->posts # This line cases the n+1 problem
-        'posts' => $category->posts  # this is the solutuon
+        'posts' => $category->posts,  # this is the solutuon
+        'currentCategory' => $category,
+        'categories' => Category::all()
     ]);
 });
 
