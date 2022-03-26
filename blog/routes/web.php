@@ -71,7 +71,7 @@ Route::get('/', function () {
         'posts' => Post::latest()->get(), # this is the solution
         'categories' => Category::all()
     ]);
-});
+})->name('home');
 
 # post by id
 // Route::get('/posts/{post}', function (Post $post) {
@@ -96,7 +96,7 @@ Route::get('/categories/{category:slug}', function (Category $category) {
         'currentCategory' => $category,
         'categories' => Category::all()
     ]);
-});
+})->name('category');
 
 # author
 Route::get('/authors/{author:username}', function (User $author) {
