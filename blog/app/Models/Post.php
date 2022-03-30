@@ -35,4 +35,15 @@ class Post extends Model
         # a post has only one user
         return $this->belongsTo(User::class, 'user_id'); #over writing the id
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+        // call this function : Post::nwqQuery()->filter()
+
+        if ($filters['search'] ?? false) {
+            $query
+                ->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('body', 'like', '%' . request('search') . '%');
+        }
+    }
 }
